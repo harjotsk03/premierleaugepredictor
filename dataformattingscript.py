@@ -7,135 +7,146 @@ raw_data = """Rank	Player	Club	Nationality	Stat
 
 Rank	Player	Club	Nationality	Stat	
 1.	
-Kevin De Bruyne
+William Saliba
 
-Manchester City
+Arsenal
 
-Belgium
-20	 
+France
+18	 
 2.	
-Trent Alexander-Arnold
+Gabriel Magalhães
 
-Liverpool
+Arsenal
+
+Brazil
+15	 
+3.	
+James Tarkowski
+
+Everton
 
 England
 13	 
 3.	
-Andy Robertson
+Ben White
 
-Liverpool
-
-Scotland
-12	 
-4.	
-Mohamed Salah
-
-Liverpool
-
-Egypt
-10	 
-4.	
-David Silva
--	
-
-Spain
-10	 
-4.	
-Son Heung-Min
-
-Tottenham Hotspur
-
-South Korea
-10	 
-7.	
-Riyad Mahrez
--	
-
-Algeria
-9	 
-7.	
-Adama Traoré
--	
-
-Spain
-9	 
-9.	
-Roberto Firmino
--	
-
-Brazil
-8	 
-9.	
-Harvey Barnes
--	
+Arsenal
 
 England
-8	 
-11.	
-Willian
--	
+13	 
+5.	
+Jarrad Branthwaite
 
-Brazil
-7	 
-11.	
-Bruno Fernandes
+Everton
 
-Manchester United
+England
+12	 
+6.	
+Manuel Akanji
 
-Portugal
-7	 
-11.	
-Emiliano Buendía
--	
+Manchester City
 
-Argentina
-7	 
-11.	
-Gabriel Jesus
--	
+Switzerland
+11	 
+7.	
+Tyrick Mitchell
 
-Brazil
-7	 
-11.	
-Lucas Digne
--	
+Crystal Palace
 
-France
-7	 
-11.	
-Sadio Mané
--	
-
-Senegal
-7	 
-11.	
-Bernardo Silva
+England
+10	 
+8.	
+Rúben Dias
 
 Manchester City
 
 Portugal
-7	 
-11.	
-Marcus Rashford
+9	 
+8.	
+Josko Gvardiol
 
-Manchester United
+Manchester City
+
+Croatia
+9	 
+8.	
+Vitalii Mykolenko
+
+Everton
+
+Ukraine
+9	 
+8.	
+Virgil van Dijk
+
+Liverpool
+
+Netherlands
+9	 
+12.	
+Joachim Andersen
+-	
+
+Denmark
+8	 
+12.	
+Timothy Castagne
+
+Fulham
+
+Belgium
+8	 
+12.	
+Fabian Schär
+
+Newcastle United
+
+Switzerland
+8	 
+12.	
+Illia Zabarnyi
+
+Bournemouth
+
+Ukraine
+8	 
+16.	
+Dan Burn
+
+Newcastle United
 
 England
 7	 
-19.	
-César Azpilicueta
--	
+16.	
+Nathan Collins
 
-Spain
-6	 
-19.	
-João Moutinho
--	
+Brentford
+
+Ireland
+7	 
+16.	
+Diogo Dalot
+
+Manchester United
 
 Portugal
-6	 
+7	 
+16.	
+Antonee Robinson
+
+Fulham
+
+United States
+7	 
+16.	
+Cristian Romero
+
+Tottenham Hotspur
+
+Argentina
+7	 
 """
-def parse_raw_data(raw, year="2019/2020", statName="Assists"):
+def parse_raw_data(raw, year="2023/2024", statName="Defender Clean Sheets"):
     entries = re.split(r'\d+\.\s+', raw)[1:]  # Split by rank numbers
     data = []
     for entry in entries:
@@ -152,7 +163,7 @@ def parse_raw_data(raw, year="2019/2020", statName="Assists"):
     return data
 
 # Write data to CSV
-def write_to_csv(data, filename="output.csv", statName="Assists"):
+def write_to_csv(data, filename="output.csv", statName="Defender Clean Sheets"):
     for rank, item in enumerate(data, start=1):
         item["Rank"] = rank
 
@@ -166,6 +177,6 @@ def write_to_csv(data, filename="output.csv", statName="Assists"):
             writer.writeheader()
         writer.writerows(data)
 
-structured_data = parse_raw_data(raw_data, year="2010/2020")
-write_to_csv(structured_data, filename="assists_stats.csv")
-print("Data written to assists_stats.csv")
+structured_data = parse_raw_data(raw_data, year="2023/2024")
+write_to_csv(structured_data, filename="defender_clean_sheets_stats.csv")
+print("Data written to defender_clean_sheets_stats.csv")

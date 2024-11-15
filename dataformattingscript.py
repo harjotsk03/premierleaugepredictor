@@ -7,146 +7,134 @@ raw_data = """Rank	Player	Club	Nationality	Stat
 
 Rank	Player	Club	Nationality	Stat	
 1.	
-William Saliba
+George Baldock
+-	
 
-Arsenal
-
-France
-18	 
-2.	
-Gabriel Magalhães
-
-Arsenal
-
-Brazil
-15	 
-3.	
-James Tarkowski
-
-Everton
+Greece
+3,420	 
+1.	
+Conor Coady
+-	
 
 England
-13	 
-3.	
-Ben White
+3,420	 
+1.	
+David de Gea
+-	
 
-Arsenal
-
-England
-13	 
-5.	
-Jarrad Branthwaite
-
-Everton
-
-England
-12	 
-6.	
-Manuel Akanji
-
-Manchester City
-
-Switzerland
-11	 
-7.	
-Tyrick Mitchell
-
-Crystal Palace
-
-England
-10	 
-8.	
-Rúben Dias
-
-Manchester City
+Spain
+3,420	 
+1.	
+Rui Patrício
+-	
 
 Portugal
-9	 
-8.	
-Josko Gvardiol
+3,420	 
+1.	
+Martin Dúbravka
 
-Manchester City
+Newcastle United
 
-Croatia
-9	 
-8.	
-Vitalii Mykolenko
+Slovakia
+3,420	 
+1.	
+Ben Foster
+-	
+
+England
+3,420	 
+1.	
+Harry Maguire
+
+Manchester United
+
+England
+3,420	 
+1.	
+Jordan Pickford
 
 Everton
 
-Ukraine
-9	 
-8.	
+England
+3,420	 
+1.	
+Nick Pope
+
+Burnley
+
+England
+3,420	 
+1.	
+Declan Rice
+-	
+
+England
+3,420	 1.	
+Mathew Ryan
+-	
+
+Australia
+3,420	 
+1.	
+Kasper Schmeichel
+-	
+
+Denmark
+3,420	 
+1.	
+James Tarkowski
+
+Burnley
+
+England
+3,420	 
+1.	
 Virgil van Dijk
 
 Liverpool
 
 Netherlands
-9	 
-12.	
-Joachim Andersen
+3,420	 
+1.	
+James Ward-Prowse
 -	
 
-Denmark
-8	 
-12.	
-Timothy Castagne
-
-Fulham
-
-Belgium
-8	 
-12.	
-Fabian Schär
-
-Newcastle United
-
-Switzerland
-8	 
-12.	
-Illia Zabarnyi
-
-Bournemouth
-
-Ukraine
-8	 
-16.	
-Dan Burn
-
-Newcastle United
-
 England
-7	 
+3,420	 
 16.	
-Nathan Collins
+Jonny Evans
+-	
 
-Brentford
+Northern Ireland
+3,385	 
+17.	
+Enda Stevens
+-	
 
 Ireland
-7	 
-16.	
-Diogo Dalot
+3,346	 
+18.	
+Dwight McNeil
 
-Manchester United
+Burnley
 
-Portugal
-7	 
-16.	
-Antonee Robinson
+England
+3,344	 
+19.	
+Aaron Ramsdale
+-	
 
-Fulham
+England
+3,330	 
+20.	
+Wilfried Zaha
+-	
 
-United States
-7	 
-16.	
-Cristian Romero
-
-Tottenham Hotspur
-
-Argentina
-7	 
+Cote D’Ivoire
+3,280	 
 """
-def parse_raw_data(raw, year="2023/2024", statName="Defender Clean Sheets"):
+
+def parse_raw_data(raw, year="2019/2020", statName="Minutes Played"):
     entries = re.split(r'\d+\.\s+', raw)[1:]  # Split by rank numbers
     data = []
     for entry in entries:
@@ -156,14 +144,14 @@ def parse_raw_data(raw, year="2023/2024", statName="Defender Clean Sheets"):
             club = lines[1] if lines[1] != "-" else "Unknown"
             nationality = lines[2]
             try:
-                stat = int(lines[3])  # Convert stat to integer
+                stat = int(lines[3].replace(",", ""))  # Convert stat to integer
             except ValueError:
                 stat = 0  # Default to 0 if stat is invalid
             data.append({"Rank": None, "Player": player, "Club": club, "Year": year, statName: stat})
     return data
 
 # Write data to CSV
-def write_to_csv(data, filename="output.csv", statName="Defender Clean Sheets"):
+def write_to_csv(data, filename="output.csv", statName="Minutes Played"):
     for rank, item in enumerate(data, start=1):
         item["Rank"] = rank
 
@@ -177,6 +165,6 @@ def write_to_csv(data, filename="output.csv", statName="Defender Clean Sheets"):
             writer.writeheader()
         writer.writerows(data)
 
-structured_data = parse_raw_data(raw_data, year="2023/2024")
-write_to_csv(structured_data, filename="defender_clean_sheets_stats.csv")
-print("Data written to defender_clean_sheets_stats.csv")
+structured_data = parse_raw_data(raw_data, year="2019/2020")
+write_to_csv(structured_data, filename="minutes_played_stats.csv")
+print("Data written to minutes_played_stats.csv")
